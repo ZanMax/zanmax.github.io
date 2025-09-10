@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Support My Work - Max Zanoga</title>
+    <title>Blog - Max Zanoga</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -71,7 +71,8 @@
                 <ul class="hidden md:flex items-center space-x-6">
                     <li><a href="index.html#about" class="nav-link font-medium">About</a></li>
                     <li><a href="index.html#projects" class="nav-link font-medium">Projects</a></li>
-                    <li><a href="index.html#blog" class="nav-link font-medium">Blog</a></li>
+                    <li><a href="blog-list.html" class="nav-link font-medium">Blog</a></li>
+                    <li><a href="support.html" class="nav-link font-medium">Support Me</a></li>
                 </ul>
                 <button id="theme-toggle" class="text-2xl w-8 h-8 flex items-center justify-center focus:outline-none">
                     <i id="moon-icon" class="fas fa-moon"></i>
@@ -86,41 +87,53 @@
         <div id="mobile-menu" class="hidden md:hidden bg-opacity-90">
             <a href="index.html#about" class="block py-2 px-4 text-sm nav-link">About</a>
             <a href="index.html#projects" class="block py-2 px-4 text-sm nav-link">Projects</a>
-            <a href="index.html#blog" class="block py-2 px-4 text-sm nav-link">Blog</a>
+            <a href="blog-list.html" class="block py-2 px-4 text-sm nav-link">Blog</a>
+            <a href="support.html" class="block py-2 px-4 text-sm nav-link">Support Me</a>
         </div>
     </header>
 
     <!-- Main Content -->
     <main class="container mx-auto px-6 py-12">
+        <section id="blog-list" class="py-20">
+            <div class="text-center mb-12">
+                <h1 class="text-4xl md:text-5xl font-bold">Digital Garden</h1>
+                <p class="text-lg md:text-xl max-w-2xl mx-auto mt-4">A collection of articles, thoughts, and explorations in AI and code.</p>
+            </div>
 
-        <section id="support" class="text-center py-20">
-            <h1 class="text-4xl md:text-5xl font-bold mb-6">Support My Work 🤝</h1>
-            <p class="text-lg md:text-xl max-w-2xl mx-auto mb-12">If you find my projects and articles helpful, please consider supporting my work. Your contribution helps me dedicate more time to creating and sharing open-source content.</p>
-            
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-4xl mx-auto">
-                <!-- PayPal -->
-                <a href="https://www.paypal.me/zanoga" target="_blank" class="card p-6 rounded-lg shadow-lg transform hover:-translate-y-2 flex flex-col items-center justify-center">
-                    <i class="fab fa-paypal text-4xl mb-4 text-blue-600"></i>
-                    <h3 class="text-xl font-bold">PayPal</h3>
-                </a>
-                <!-- Buy Me a Coffee -->
-                <a href="https://www.buymeacoffee.com/ZanMax" target="_blank" class="card p-6 rounded-lg shadow-lg transform hover:-translate-y-2 flex flex-col items-center justify-center">
-                    <i class="fas fa-coffee text-4xl mb-4 text-yellow-500"></i>
-                    <h3 class="text-xl font-bold">Buy Me a Coffee</h3>
-                </a>
-                <!-- Patreon -->
-                <a href="https://patreon.com/zanmax" target="_blank" class="card p-6 rounded-lg shadow-lg transform hover:-translate-y-2 flex flex-col items-center justify-center">
-                    <i class="fab fa-patreon text-4xl mb-4 text-orange-500"></i>
-                    <h3 class="text-xl font-bold">Patreon</h3>
-                </a>
-                <!-- Ko-fi -->
-                <a href="https://ko-fi.com/zanmax" target="_blank" class="card p-6 rounded-lg shadow-lg transform hover:-translate-y-2 flex flex-col items-center justify-center">
-                     <i class="fas fa-mug-saucer text-4xl mb-4 text-cyan-500"></i>
-                    <h3 class="text-xl font-bold">Ko-fi</h3>
-                </a>
+            <div class="space-y-12 max-w-4xl mx-auto">
+                <!-- Blog Post Snippet 1 -->
+                <div class="card p-8 rounded-lg shadow-lg">
+                    <p class="text-sm text-gray-500 dark:text-gray-400 mb-2">September 8, 2025</p>
+                    <h2 class="text-2xl md:text-3xl font-bold mb-4"><a href="blog-view.html" class="hover:underline primary-text">Getting Started with Large Language Models</a></h2>
+                    <p class="mb-4">An introduction to the world of LLMs. We'll cover the basics of what they are, how they work, and how you can start experimenting with them today...</p>
+                    <a href="blog-view.html" class="font-semibold primary-text hover:underline">Read more &rarr;</a>
+                </div>
+                <!-- Add more blog post snippets here... (9 more for a total of 10) -->
+                <div class="card p-8 rounded-lg shadow-lg">
+                    <p class="text-sm text-gray-500 dark:text-gray-400 mb-2">August 22, 2025</p>
+                    <h2 class="text-2xl md:text-3xl font-bold mb-4"><a href="#" class="hover:underline primary-text">The Art of Prompt Engineering</a></h2>
+                    <p class="mb-4">Discover how crafting the perfect prompt can unlock the full potential of generative AI models. It's more than just asking a question; it's a new way of programming...</p>
+                    <a href="#" class="font-semibold primary-text hover:underline">Read more &rarr;</a>
+                </div>
+                 <div class="card p-8 rounded-lg shadow-lg">
+                    <p class="text-sm text-gray-500 dark:text-gray-400 mb-2">July 15, 2025</p>
+                    <h2 class="text-2xl md:text-3xl font-bold mb-4"><a href="#" class="hover:underline primary-text">Building a RAG Pipeline from Scratch</a></h2>
+                    <p class="mb-4">Retrieval-Augmented Generation is a powerful technique. In this post, we'll build a simple RAG system to chat with your own documents...</p>
+                    <a href="#" class="font-semibold primary-text hover:underline">Read more &rarr;</a>
+                </div>
+            </div>
+
+            <!-- Pagination -->
+            <div class="flex justify-center mt-16">
+                <nav class="flex items-center space-x-2">
+                    <a href="#" class="px-4 py-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700">Previous</a>
+                    <a href="#" class="px-4 py-2 rounded-md bg-blue-500 text-white">1</a>
+                    <a href="#" class="px-4 py-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700">2</a>
+                    <a href="#" class="px-4 py-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700">3</a>
+                    <a href="#" class="px-4 py-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700">Next</a>
+                </nav>
             </div>
         </section>
-
     </main>
 
     <!-- Footer -->
