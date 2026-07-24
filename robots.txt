@@ -1,2 +1,7 @@
 User-agent: *
 Allow: /
+
+# Article template with placeholder content — not a real post
+Disallow: /blog-view.html
+
+Sitemap: https://zanmax.github.io/sitemap.xml

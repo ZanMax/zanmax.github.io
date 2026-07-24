@@ -1,263 +1,267 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Max Zanoga - Software Developer</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Max Zanoga — AI/ML Engineer, Co-founder LAB32.AI</title>
+    <meta name="description" content="Max Zanoga — AI/ML Engineer and co-founder of LAB32.AI. Building the infrastructure that runs AI in production, on a 32x RTX 3090 GPU cluster.">
+    <meta name="theme-color" content="#7CE495">
+    <link rel="icon" href="favicon.ico">
+
+    <meta property="og:title" content="Max Zanoga — AI/ML Engineer, Co-founder LAB32.AI">
+    <meta property="og:description" content="Building the infrastructure that runs AI in production, on a 32x RTX 3090 GPU cluster.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://zanmax.github.io/">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --background-light: #f7fafc;
-            --text-light: #2d3748;
-            --primary-light: #4299e1;
-            --card-light: #ffffff;
-            --border-light: #e2e8f0;
-
-            --background-dark: #1a202c;
-            --text-dark: #e2e8f0;
-            --primary-dark: #63b3ed;
-            --card-dark: #2d3748;
-            --border-dark: #4a5568;
-        }
-        .light {
-            background-color: var(--background-light);
-            color: var(--text-light);
-        }
-        .dark {
-            background-color: var(--background-dark);
-            color: var(--text-dark);
-        }
-        body {
-            font-family: 'Inter', sans-serif;
-            transition: background-color 0.3s ease, color 0.3s ease;
-        }
-        .card {
-            background-color: var(--card-light);
-            border: 1px solid var(--border-light);
-            transition: all 0.3s ease;
-        }
-        .dark .card {
-            background-color: var(--card-dark);
-            border-color: var(--border-dark);
-        }
-        .primary-text {
-            color: var(--primary-light);
-        }
-        .dark .primary-text {
-            color: var(--primary-dark);
-        }
-        .nav-link {
-            transition: color 0.3s ease;
-        }
-        .nav-link:hover {
-            color: var(--primary-light);
-        }
-        .dark .nav-link:hover {
-            color: var(--primary-dark);
-        }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/site.css?v=20260722h">
+    <script>try{document.documentElement.setAttribute("data-theme",localStorage.getItem("theme")||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"))}catch(e){}</script>
 </head>
-<body class="light">
+<body>
+    <a class="skip" href="#main">Skip to content</a>
 
-    <!-- Header -->
-    <header class="sticky top-0 z-50 shadow-md backdrop-blur-md">
-        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#" class="text-2xl font-bold primary-text">ZanMax</a>
-            <div class="flex items-center space-x-6">
-                <ul class="hidden md:flex items-center space-x-6">
-                    <li><a href="#about" class="nav-link font-medium">About</a></li>
-                    <li><a href="#projects" class="nav-link font-medium">Projects</a></li>
-                    <li><a href="#blog" class="nav-link font-medium">Blog</a></li>
-                </ul>
-                <button id="theme-toggle" class="text-2xl w-8 h-8 flex items-center justify-center focus:outline-none">
-                    <i id="moon-icon" class="fas fa-moon"></i>
-                    <i id="sun-icon" class="fas fa-sun hidden"></i>
-                </button>
-                 <button id="mobile-menu-button" class="md:hidden">
-                    <i class="fas fa-bars text-2xl"></i>
-                </button>
+    <header>
+        <div class="wrap">
+            <div class="bar">
+                <a class="brand" href="#top"><span class="dot" aria-hidden="true"></span>Max Zanoga</a>
+                <div class="nav-actions">
+                    <nav class="primary" aria-label="Primary">
+                        <a href="#cluster">Cluster</a>
+                        <a href="#about">About</a>
+                        <a href="#projects">Projects</a>
+                    </nav>
+                    <button class="icon-btn" id="menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav">
+                        <i class="fas fa-bars" aria-hidden="true"></i>
+                    </button>
+                    <button class="icon-btn" id="theme-toggle" aria-label="Switch to dark theme">
+                        <i class="fas fa-moon" id="theme-icon" aria-hidden="true"></i>
+                    </button>
+                </div>
             </div>
-        </nav>
-        <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden bg-opacity-90">
-            <a href="#about" class="block py-2 px-4 text-sm nav-link">About</a>
-            <a href="#projects" class="block py-2 px-4 text-sm nav-link">Projects</a>
-            <a href="#blog" class="block py-2 px-4 text-sm nav-link">Blog</a>
+            <nav class="mobile-nav" id="mobile-nav" aria-label="Mobile">
+                <a href="#cluster">Cluster</a>
+                <a href="#about">About</a>
+                <a href="#projects">Projects</a>
+            </nav>
         </div>
     </header>
 
-    <!-- Main Content -->
-    <main class="container mx-auto px-6 py-12">
-
-        <!-- Hero Section -->
-        <section id="home" class="text-center py-20">
-            <h1 class="text-5xl md:text-6xl font-bold mb-4">Welcome, friend 👋</h1>
-            <p class="text-xl md:text-2xl max-w-3xl mx-auto mb-8">This is my digital garden, where I explore the intersection of Generative AI, LLMs, and creative coding.</p>
-            <div class="flex justify-center space-x-6">
-                <a href="https://github.com/ZanMax" target="_blank" class="text-3xl hover:opacity-75 transition-opacity"><i class="fab fa-github"></i></a>
-                <a href="https://www.linkedin.com/in/max-zanoga/" target="_blank" class="text-3xl hover:opacity-75 transition-opacity"><i class="fab fa-linkedin"></i></a>
-                <a href="https://x.com/zanoga" target="_blank" class="text-3xl hover:opacity-75 transition-opacity"><i class="fab fa-twitter"></i></a>
+    <main id="main">
+        <!-- Hero -->
+        <div class="hero wrap" id="top">
+            <p class="eyebrow">AI/ML Engineer</p>
+            <h1>Building the <em>infrastructure</em> that runs AI in production.</h1>
+            <p class="role">
+                <span>AI/ML Engineer</span>
+                <span class="sep" aria-hidden="true"></span>
+                <span>Co-founder <a href="http://LAB32.AI" target="_blank" rel="noopener">LAB32.AI</a></span>
+                <span class="sep" aria-hidden="true"></span>
+                <span>Building AI infrastructure</span>
+                <span class="sep" aria-hidden="true"></span>
+                <span>32&times; RTX 3090 GPU cluster</span>
+            </p>
+            <div class="hero-links">
+                <a class="pill" href="https://huggingface.co/ZanMax" target="_blank" rel="noopener"><span class="hf" aria-hidden="true">🤗</span> Hugging Face</a>
+                <a class="pill" href="https://github.com/ZanMax" target="_blank" rel="noopener"><i class="fab fa-github" aria-hidden="true"></i> GitHub</a>
+                <a class="pill" href="https://www.linkedin.com/in/max-zanoga/" target="_blank" rel="noopener"><i class="fab fa-linkedin" aria-hidden="true"></i> LinkedIn</a>
+                <a class="pill" href="https://x.com/zanoga" target="_blank" rel="noopener"><i class="fab fa-twitter" aria-hidden="true"></i> X</a>
             </div>
-        </section>
+        </div>
 
-        <!-- About Section -->
-        <section id="about" class="py-20">
-            <h2 class="text-4xl font-bold text-center mb-12">About Me</h2>
-            <div class="flex flex-col md:flex-row items-center gap-12">
-                <div class="md:w-1/3">
-                    <img src="https://avatars.githubusercontent.com/u/451744?v=4" alt="Max Zanoga" class="rounded-full mx-auto w-40 h-40 md:w-48 md:h-48 object-cover shadow-lg">
+        <!-- Signature: the cluster -->
+        <div class="wrap" id="cluster">
+            <div class="cluster-panel">
+                <div class="cluster-head">
+                    <div>
+                        <p class="eyebrow">LAB32 compute</p>
+                        <h2>32 &times; NVIDIA RTX 3090</h2>
+                    </div>
+                    <p class="eyebrow" aria-hidden="true">gpu:00 &rarr; gpu:31</p>
                 </div>
-                <div class="md:w-2/3">
-                    <p class="text-lg mb-4">With over a decade in software development, my passion has shifted towards the exciting frontier of Generative AI and Large Language Models. My focus is on exploring how these powerful tools can be creatively applied to coding and building intelligent applications.</p>
-                    <p class="text-lg mb-4">My background in Python, microservices, and cloud infrastructure provides a solid foundation for developing and deploying complex AI-driven systems. I'm currently diving deep into LLM architecture, fine-tuning, and practical applications, sharing my findings and projects here in my digital garden.</p>
-                </div>
+
+                <div class="rack" id="rack" role="img" aria-label="Diagram of 32 GPUs, numbered 00 through 31, arranged as a rack"></div>
+
+                <dl class="cluster-stats">
+                    <div class="stat">
+                        <dt>GPUs</dt>
+                        <dd>32</dd>
+                    </div>
+                    <div class="stat">
+                        <dt>Total VRAM</dt>
+                        <dd>768 GB</dd>
+                    </div>
+                    <div class="stat">
+                        <dt>CUDA cores</dt>
+                        <dd>335,872</dd>
+                    </div>
+                    <div class="stat">
+                        <dt>Workloads</dt>
+                        <dd class="text">Training, tuning, serving</dd>
+                    </div>
+                </dl>
+
+                <p class="cluster-note">
+                    The first 32&times; RTX 3090 cluster of its kind — InfiniBand interconnect between every node,
+                    and the whole rack runs on solar.
+                </p>
+                <ul class="cluster-badges">
+                    <li><i class="fas fa-network-wired" aria-hidden="true"></i> InfiniBand fabric</li>
+                    <li><i class="fas fa-solar-panel" aria-hidden="true"></i> 100% solar powered</li>
+                    <li><i class="fas fa-server" aria-hidden="true"></i> Built in-house</li>
+                </ul>
             </div>
-        </section>
+        </div>
 
-        <!-- Projects Section -->
-        <section id="projects" class="py-20">
-            <h2 class="text-4xl font-bold text-center mb-12">My Projects</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Project 1 -->
-                <div class="card rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2">
-                    <div class="p-6">
-                        <h3 class="text-2xl font-bold mb-2">nvidia-fan-control</h3>
-                        <p class="mb-4">A simple tool to control Nvidia fan speed on Linux systems.</p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="bg-blue-200 text-blue-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full">Python</span>
-                        </div>
-                        <a href="https://github.com/ZanMax/nvidia-fan-control" target="_blank" class="primary-text font-medium hover:underline">View on GitHub <i class="fas fa-arrow-right ml-1"></i></a>
+        <!-- About -->
+        <section id="about">
+            <div class="wrap">
+                <div class="section-head">
+                    <p class="eyebrow">About</p>
+                    <h2>From backend systems to GPU racks.</h2>
+                </div>
+                <div class="about-grid">
+                    <div class="avatar">
+                        <img src="avatar.svg" alt="Portrait of Max Zanoga" width="400" height="400">
+                    </div>
+                    <div class="about-text">
+                        <p>I'm an AI/ML engineer and co-founder of <strong>LAB32.AI</strong>, where we take AI past the demo stage — fine-tuning and serving models, building RAG and agent systems, and running the infrastructure underneath them so they hold up under real traffic.</p>
+                        <p>A decade of Python, Go, microservices and cloud infrastructure sits underneath all of it. Today that experience goes into private deployments companies can actually own, on <strong>32 RTX 3090s</strong> we built and run ourselves.</p>
+                        <p>Most of what I learn ends up as open-source tooling or notes on the blog. Models and datasets land on Hugging Face.</p>
+                        <ul class="focus-list">
+                            <li>Fine-tuning</li>
+                            <li>Inference serving</li>
+                            <li>RAG &amp; agents</li>
+                            <li>GPU cluster ops</li>
+                            <li>Python</li>
+                            <li>Go</li>
+                        </ul>
                     </div>
                 </div>
-                <!-- Project 2 -->
-                <div class="card rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2">
-                    <div class="p-6">
-                        <h3 class="text-2xl font-bold mb-2">gpu-stats</h3>
-                        <p class="mb-4">A Go web service that returns GPU usage statistics in JSON format.</p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="bg-green-200 text-green-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full">Go</span>
-                            <span class="bg-gray-200 text-gray-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full">JSON</span>
-                        </div>
-                        <a href="https://github.com/ZanMax/gpu-stats" target="_blank" class="primary-text font-medium hover:underline">View on GitHub <i class="fas fa-arrow-right ml-1"></i></a>
-                    </div>
-                </div>
-                <!-- Project 3 -->
-                <div class="card rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2">
-                    <div class="p-6">
-                        <h3 class="text-2xl font-bold mb-2">sshmenu</h3>
-                        <p class="mb-4">A handy tool for quickly connecting to remote hosts via SSH.</p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="bg-purple-200 text-purple-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full">Shell</span>
-                        </div>
-                        <a href="https://github.com/ZanMax/sshmenu" target="_blank" class="primary-text font-medium hover:underline">View on GitHub <i class="fas fa-arrow-right ml-1"></i></a>
-                    </div>
-                </div>
-                 <!-- Add more projects as needed -->
             </div>
         </section>
 
-        <!-- Blog Section -->
-        <section id="blog" class="py-20">
-            <h2 class="text-4xl font-bold text-center mb-12">Latest Blog Posts</h2>
-            <div class="space-y-8">
-                <!-- Blog Post 1 -->
-                <div class="card p-6 rounded-lg shadow-lg transform hover:shadow-xl">
-                    <h3 class="text-2xl font-bold mb-2">Exploring the Power of Large Language Models</h3>
-                    <p class="text-gray-500 dark:text-gray-400 mb-4">Posted on September 1, 2025</p>
-                    <p class="mb-4">A deep dive into the architecture and capabilities of modern LLMs, and their potential impact on software development.</p>
-                    <a href="#" class="primary-text font-medium hover:underline">Read More <i class="fas fa-arrow-right ml-1"></i></a>
+        <!-- Projects -->
+        <section id="projects">
+            <div class="wrap">
+                <div class="section-head">
+                    <p class="eyebrow">Open source</p>
+                    <h2>Tools built for the cluster.</h2>
                 </div>
-                <!-- Blog Post 2 -->
-                <div class="card p-6 rounded-lg shadow-lg transform hover:shadow-xl">
-                    <h3 class="text-2xl font-bold mb-2">Getting Started with Go for Python Developers</h3>
-                     <p class="text-gray-500 dark:text-gray-400 mb-4">Posted on August 15, 2025</p>
-                    <p class="mb-4">My journey of learning Go, coming from a Python background. I'll share some tips and tricks for a smooth transition.</p>
-                    <a href="#" class="primary-text font-medium hover:underline">Read More <i class="fas fa-arrow-right ml-1"></i></a>
+                <div class="cards">
+                    <a class="card" href="https://github.com/ZanMax/nvidia-fan-control" target="_blank" rel="noopener">
+                        <h3>nvidia-fan-control</h3>
+                        <p>Keeps fan curves under control on dense multi-GPU Linux boxes, so cards stay in their thermal envelope.</p>
+                        <div class="tags"><span>Python</span><span>Linux</span></div>
+                        <span class="card-cta">View on GitHub &rarr;</span>
+                    </a>
+                    <a class="card" href="https://github.com/ZanMax/gpu-stats" target="_blank" rel="noopener">
+                        <h3>gpu-stats</h3>
+                        <p>A small Go service that exposes GPU utilization, memory and temperature as JSON for dashboards and alerts.</p>
+                        <div class="tags"><span>Go</span><span>JSON API</span></div>
+                        <span class="card-cta">View on GitHub &rarr;</span>
+                    </a>
+                    <a class="card" href="https://github.com/ZanMax/sshmenu" target="_blank" rel="noopener">
+                        <h3>sshmenu</h3>
+                        <p>A terminal picker for jumping between cluster nodes without memorizing hostnames.</p>
+                        <div class="tags"><span>Shell</span><span>CLI</span></div>
+                        <span class="card-cta">View on GitHub &rarr;</span>
+                    </a>
+                    <a class="card" href="tools/">
+                        <h3>Tools</h3>
+                        <p>Interactive references I built for my own work: a fine-tuning method explorer and an inference engine explorer, both checked against primary sources.</p>
+                        <div class="tags"><span>Fine-tuning</span><span>Inference</span></div>
+                        <span class="card-cta">Open the tools &rarr;</span>
+                    </a>
+                    <a class="card" href="https://huggingface.co/ZanMax" target="_blank" rel="noopener">
+                        <h3>Hugging Face</h3>
+                        <p>Models and datasets I publish from experiments run on the LAB32 cluster.</p>
+                        <div class="tags"><span>Models</span><span>Datasets</span></div>
+                        <span class="card-cta">View profile &rarr;</span>
+                    </a>
                 </div>
-                <!-- Add more blog posts as needed -->
             </div>
         </section>
 
+        <!-- Contact -->
+        <div class="wrap">
+            <div class="contact">
+                <p class="eyebrow">Get in touch</p>
+                <h2>Taking AI into production?</h2>
+                <p>Private model deployments, fine-tuning on your own data, RAG and agent systems, or infrastructure that has outgrown a single machine — happy to talk.</p>
+                <div class="hero-links">
+                    <a class="pill" href="mailto:zanoga.maxim@gmail.com"><i class="fas fa-envelope" aria-hidden="true"></i> Email me</a>
+                    <a class="pill" href="http://LAB32.AI" target="_blank" rel="noopener"><i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i> LAB32.AI</a>
+                    <a class="pill" href="https://huggingface.co/ZanMax" target="_blank" rel="noopener"><span class="hf" aria-hidden="true">🤗</span> Hugging Face</a>
+                </div>
+            </div>
+        </div>
     </main>
 
-    <!-- Footer -->
-    <footer class="py-6 mt-12 border-t dark:border-gray-700">
-        <div class="container mx-auto px-6 text-center">
-            <p>&copy; 2025 Max Zanoga. All Rights Reserved.</p>
-            <div class="flex justify-center space-x-4 mt-4">
-                <a href="https://github.com/ZanMax" target="_blank" class="hover:opacity-75 transition-opacity"><i class="fab fa-github text-xl"></i></a>
-                <a href="https://www.linkedin.com/in/max-zanoga/" target="_blank" class="hover:opacity-75 transition-opacity"><i class="fab fa-linkedin text-xl"></i></a>
-                <a href="https://x.com/zanoga" target="_blank" class="hover:opacity-75 transition-opacity"><i class="fab fa-twitter text-xl"></i></a>
+    <footer>
+        <div class="wrap">
+            <div class="foot">
+                <p>&copy; 2026 Max Zanoga</p>
+                <div class="foot-links">
+                    <a href="blog.html">Blog</a>
+                    <a href="support.html">Support</a>
+                    <a href="https://huggingface.co/ZanMax" target="_blank" rel="noopener">Hugging Face</a>
+                    <a href="https://github.com/ZanMax" target="_blank" rel="noopener">GitHub</a>
+                    <a href="https://www.linkedin.com/in/max-zanoga/" target="_blank" rel="noopener">LinkedIn</a>
+                    <a href="https://x.com/zanoga" target="_blank" rel="noopener">X</a>
+                </div>
             </div>
         </div>
     </footer>
 
+    <script src="assets/js/site.js?v=20260722h"></script>
     <script>
-        // Dark/Light mode toggle
-        const themeToggle = document.getElementById('theme-toggle');
-        const body = document.body;
-        const moonIcon = document.getElementById('moon-icon');
-        const sunIcon = document.getElementById('sun-icon');
+        // --- Cluster rack: 32 GPUs, staggered warm-up ---
+        const rack = document.getElementById('rack');
+        const cells = [];
 
-        const setAndSaveTheme = (theme) => {
-            if (theme === 'dark') {
-                body.classList.remove('light');
-                body.classList.add('dark');
-                moonIcon.classList.add('hidden');
-                sunIcon.classList.remove('hidden');
-            } else {
-                body.classList.remove('dark');
-                body.classList.add('light');
-                moonIcon.classList.remove('hidden');
-                sunIcon.classList.add('hidden');
-            }
-            localStorage.setItem('theme', theme);
-        };
-
-        const savedTheme = localStorage.getItem('theme');
-        const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-
-        if (savedTheme) {
-            setAndSaveTheme(savedTheme);
-        } else if (prefersDark) {
-            setAndSaveTheme('dark');
-        } else {
-            setAndSaveTheme('light');
+        for (let i = 0; i < 32; i++) {
+            const cell = document.createElement('div');
+            cell.className = 'gpu';
+            cell.style.animationDelay = `${(i % 8) * 0.16 + Math.floor(i / 8) * 0.4}s`;
+            cell.innerHTML = `<span class="id">${String(i).padStart(2, '0')}</span>`;
+            rack.appendChild(cell);
+            cells.push(cell);
         }
 
-        themeToggle.addEventListener('click', () => {
-            const currentTheme = body.classList.contains('dark') ? 'dark' : 'light';
-            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-            setAndSaveTheme(newTheme);
-        });
+        // Emulated cluster load: each GPU drifts around its own busy baseline.
+        const still = window.matchMedia('(prefers-reduced-motion: reduce)');
+        const baselines = cells.map(() => 55 + Math.random() * 35);
 
-        // Mobile menu toggle
-        const mobileMenuButton = document.getElementById('mobile-menu-button');
-        const mobileMenu = document.getElementById('mobile-menu');
-
-        mobileMenuButton.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
-
-        // Close mobile menu when a link is clicked
-        document.querySelectorAll('#mobile-menu a').forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.add('hidden');
+        const paint = (drift) => {
+            cells.forEach((cell, i) => {
+                const load = Math.max(18, Math.min(99, baselines[i] + (drift ? (Math.random() - 0.5) * 30 : 0)));
+                cell.style.setProperty('--load', `${load.toFixed(0)}%`);
+                cell.title = `gpu:${String(i).padStart(2, '0')} — ${load.toFixed(0)}% utilization`;
             });
-        });
-        
-        // Close menu on scroll
-        window.addEventListener('scroll', () => {
-            if (!mobileMenu.classList.contains('hidden')) {
-                mobileMenu.classList.add('hidden');
-            }
-        });
+        };
 
+        paint(false);
+
+        // Only animate while the rack is on screen and the tab is visible.
+        let timer = null;
+        let onScreen = false;
+
+        const sync = () => {
+            const shouldRun = onScreen && !document.hidden && !still.matches;
+            if (shouldRun && !timer) timer = setInterval(() => paint(true), 1800);
+            if (!shouldRun && timer) { clearInterval(timer); timer = null; }
+        };
+
+        new IntersectionObserver(([entry]) => {
+            onScreen = entry.isIntersecting;
+            sync();
+        }, { threshold: 0.1 }).observe(rack);
+
+        document.addEventListener('visibilitychange', sync);
+        still.addEventListener('change', sync);
     </script>
-
 </body>
 </html>

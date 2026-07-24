@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The VC Framework — Max Zanoga</title>
+    <meta name="description" content="A disciplined process for building software with agentic coding CLIs — Claude Code, OpenAI Codex and Gemini CLI. The shared shape, and the habits that keep all three honest.">
+    <meta name="theme-color" content="#7CE495">
+    <link rel="icon" href="../favicon.ico">
+
+    <meta property="og:title" content="The VC Framework — Max Zanoga">
+    <meta property="og:description" content="A disciplined process for building software with agentic coding CLIs.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://zanmax.github.io/tools/vc-framework.html">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../assets/css/site.css?v=20260722h">
+    <script>try{document.documentElement.setAttribute("data-theme",localStorage.getItem("theme")||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"))}catch(e){}</script>
+</head>
+<body>
+    <a class="skip" href="#main">Skip to content</a>
+
+    <header>
+        <div class="wrap">
+            <div class="bar">
+                <a class="brand" href="../index.html"><span class="dot" aria-hidden="true"></span>Max Zanoga</a>
+                <div class="nav-actions">
+                    <nav class="primary" aria-label="Primary">
+                        <a href="../index.html#cluster">Cluster</a>
+                        <a href="../index.html#about">About</a>
+                        <a href="../index.html#projects">Projects</a>
+                    </nav>
+                    <button class="icon-btn" id="menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav">
+                        <i class="fas fa-bars" aria-hidden="true"></i>
+                    </button>
+                    <button class="icon-btn" id="theme-toggle" aria-label="Switch to dark theme">
+                        <i class="fas fa-moon" id="theme-icon" aria-hidden="true"></i>
+                    </button>
+                </div>
+            </div>
+            <nav class="mobile-nav" id="mobile-nav" aria-label="Mobile">
+                <a href="../index.html#cluster">Cluster</a>
+                <a href="../index.html#about">About</a>
+                <a href="../index.html#projects">Projects</a>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main">
+        <div class="page-head wrap">
+            <p class="eyebrow">Tool · Verified July 2026</p>
+            <h1>The <em>VC Framework</em>.</h1>
+            <p class="lede">A disciplined process for building software with agentic coding CLIs — Claude Code, OpenAI Codex and Gemini CLI. They share the same shape, and the same handful of habits keep all three honest.</p>
+        </div>
+
+        <!-- Modes -->
+        <section id="modes">
+            <div class="wrap">
+                <div class="section-head">
+                    <p class="eyebrow">Pick your agent</p>
+                    <h2>Same shape, four flavours.</h2>
+                </div>
+
+                <div class="mode-tabs" id="mode-tabs" role="tablist" aria-label="Coding agent"></div>
+                <p class="mode-intro" id="mode-intro"></p>
+
+                <p class="eyebrow" style="margin-bottom:.8rem">The stack</p>
+                <ul class="stack" id="mode-stack"></ul>
+
+                <p class="eyebrow" style="margin-bottom:1rem">The loop</p>
+                <ul class="steps" id="mode-steps"></ul>
+                <p class="wizard-note" style="margin-top:1.2rem">Prompts are starting points — click any one to copy it. Adapt them to your repo; none are magic incantations.</p>
+            </div>
+        </section>
+
+        <!-- MCP -->
+        <section id="mcp">
+            <div class="wrap">
+                <div class="section-head">
+                    <p class="eyebrow">The biggest shift</p>
+                    <h2>Stop pasting docs. Connect tools.</h2>
+                </div>
+                <p class="mode-intro">The single biggest shift is the <strong>Model Context Protocol</strong>. Instead of copying documentation into the chat, the agent connects to MCP servers — GitHub, a database, your docs, Slack — and calls them as live tools. Anthropic introduced it, and OpenAI Codex and Google Gemini CLI support it natively too. If a step in your workflow is "paste the current API docs," an MCP server replaces it.</p>
+                <ul class="topics">
+                    <li>
+                        <strong>Live, not stale</strong>
+                        <span>The agent pulls current data the moment it needs it, instead of working from a snapshot you pasted an hour ago.</span>
+                    </li>
+                    <li>
+                        <strong>One protocol, every agent</strong>
+                        <span>The same MCP server works with Claude Code, Codex and Gemini CLI. Write the integration once.</span>
+                    </li>
+                    <li>
+                        <strong>Tools, not text</strong>
+                        <span>GitHub issues, database rows and search results arrive as structured tool calls the agent can act on — not a wall of pasted text.</span>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Timeless -->
+        <section id="timeless">
+            <div class="wrap">
+                <div class="section-head">
+                    <p class="eyebrow">The fundamentals</p>
+                    <h2>The habits that keep it honest.</h2>
+                </div>
+                <ul class="topics">
+                    <li>
+                        <strong>Trust Git, not the bot</strong>
+                        <span>When the agent breaks something, revert — don't argue it into a fix. A clean commit per task makes that a one-liner. The most important rule here.</span>
+                    </li>
+                    <li>
+                        <strong>Small, atomic tasks</strong>
+                        <span>One reviewable change at a time. Small tasks fail cheaply, and they map cleanly onto subagents and plan mode.</span>
+                    </li>
+                    <li>
+                        <strong>Tests are the guardrail</strong>
+                        <span>Enforceable, not just advisory: a Stop hook can block the agent from finishing until the test suite is green.</span>
+                    </li>
+                    <li>
+                        <strong>Reset context deliberately</strong>
+                        <span>One task, one chat — but you do it with a command like /clear, not a new terminal, and auto-compaction covers the long runs.</span>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <div class="wrap">
+            <div class="contact">
+                <p class="eyebrow">Built this way</p>
+                <h2>This whole site was built with these tools.</h2>
+                <p>The explorers, the redesign, this page — all built with an agentic CLI following roughly this loop. If you want to compare notes, get in touch.</p>
+                <div class="hero-links">
+                    <a class="pill" href="mailto:zanoga.maxim@gmail.com"><i class="fas fa-envelope" aria-hidden="true"></i> Email me</a>
+                    <a class="pill" href="index.html"><i class="fas fa-sliders" aria-hidden="true"></i> More tools</a>
+                    <a class="pill" href="https://github.com/ZanMax" target="_blank" rel="noopener"><i class="fab fa-github" aria-hidden="true"></i> GitHub</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="wrap">
+            <div class="foot">
+                <p>&copy; 2026 Max Zanoga · Checked against primary docs July 2026</p>
+                <div class="foot-links">
+                    <a href="../blog.html">Blog</a>
+                    <a href="../support.html">Support</a>
+                    <a href="https://huggingface.co/ZanMax" target="_blank" rel="noopener">Hugging Face</a>
+                    <a href="https://github.com/ZanMax" target="_blank" rel="noopener">GitHub</a>
+                    <a href="https://www.linkedin.com/in/max-zanoga/" target="_blank" rel="noopener">LinkedIn</a>
+                    <a href="https://x.com/zanoga" target="_blank" rel="noopener">X</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../assets/js/site.js?v=20260722h"></script>
+    <script src="../assets/js/vc-framework.js?v=20260722h"></script>
+</body>
+</html>

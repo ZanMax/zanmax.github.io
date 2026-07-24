@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Will it fit? — VRAM calculator — Max Zanoga</title>
+    <meta name="description" content="Estimate LLM VRAM for inference and fine-tuning — weights, KV cache and optimizer state — and how many 3090/4090/5090/A100/H100 GPUs you need.">
+    <meta name="theme-color" content="#7CE495">
+    <link rel="icon" href="../favicon.ico">
+
+    <meta property="og:title" content="Will it fit? — VRAM calculator — Max Zanoga">
+    <meta property="og:description" content="How much VRAM your model needs, and how many GPUs that is.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://zanmax.github.io/tools/vram.html">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../assets/css/site.css?v=20260722h">
+    <script>try{document.documentElement.setAttribute("data-theme",localStorage.getItem("theme")||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"))}catch(e){}</script>
+</head>
+<body>
+    <a class="skip" href="#main">Skip to content</a>
+
+    <header>
+        <div class="wrap">
+            <div class="bar">
+                <a class="brand" href="../index.html"><span class="dot" aria-hidden="true"></span>Max Zanoga</a>
+                <div class="nav-actions">
+                    <nav class="primary" aria-label="Primary">
+                        <a href="../index.html#cluster">Cluster</a>
+                        <a href="../index.html#about">About</a>
+                        <a href="../index.html#projects">Projects</a>
+                    </nav>
+                    <button class="icon-btn" id="menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav">
+                        <i class="fas fa-bars" aria-hidden="true"></i>
+                    </button>
+                    <button class="icon-btn" id="theme-toggle" aria-label="Switch to dark theme">
+                        <i class="fas fa-moon" id="theme-icon" aria-hidden="true"></i>
+                    </button>
+                </div>
+            </div>
+            <nav class="mobile-nav" id="mobile-nav" aria-label="Mobile">
+                <a href="../index.html#cluster">Cluster</a>
+                <a href="../index.html#about">About</a>
+                <a href="../index.html#projects">Projects</a>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main">
+        <div class="page-head wrap">
+            <p class="eyebrow">Tool</p>
+            <h1>Will it <em>fit</em>?</h1>
+            <p class="lede">How much VRAM a model actually needs — weights, KV cache and optimizer state broken out — and how many consumer or datacenter GPUs that works out to. Tuned for the case the generic calculators handle worst: multiple 24 GB cards.</p>
+        </div>
+
+        <div class="wrap">
+            <div class="wizard">
+                <div class="calc-grid">
+                    <span class="k">Model</span>
+                    <select id="model" aria-label="Model"></select>
+
+                    <div class="custom-panel" id="custom-panel">
+                        <span class="k">Params (B)</span>
+                        <input type="number" id="c-params" min="0.1" step="0.1" aria-label="Parameters in billions">
+                        <span class="k">Layers</span>
+                        <input type="number" id="c-layers" min="1" step="1" aria-label="Layers">
+                        <span class="k">Hidden size</span>
+                        <input type="number" id="c-hidden" min="1" step="1" aria-label="Hidden size">
+                        <span class="k">Attn heads</span>
+                        <input type="number" id="c-heads" min="1" step="1" aria-label="Attention heads">
+                        <span class="k">KV heads</span>
+                        <input type="number" id="c-kvHeads" min="1" step="1" aria-label="KV heads">
+                    </div>
+
+                    <span class="k">Precision</span>
+                    <div class="seg" id="precision-seg" role="group" aria-label="Precision"></div>
+
+                    <span class="k">Task</span>
+                    <div class="seg" id="task-seg" role="group" aria-label="Task"></div>
+
+                    <span class="k">Context</span>
+                    <input type="number" id="context" min="128" step="512" value="4096" aria-label="Context length in tokens">
+
+                    <span class="k">Batch</span>
+                    <input type="number" id="batch" min="1" step="1" value="1" aria-label="Batch size">
+
+                    <span class="k" id="ckpt-row-k" style="display:none">Grad checkpoint</span>
+                    <label id="ckpt-row" style="display:none; font-size:.9rem; color:var(--muted)">
+                        <input type="checkbox" id="ckpt" checked> Gradient checkpointing (cuts training activation memory)
+                    </label>
+
+                    <span class="k">Target GPU</span>
+                    <select id="gpu" aria-label="GPU"></select>
+                </div>
+
+                <div class="verdict-box">
+                    <div class="total" id="total"></div>
+                    <p class="fits" id="fits"></p>
+                    <div class="bar-track" id="bar" role="img" aria-label="Memory breakdown"></div>
+                    <div class="legend" id="legend"></div>
+                </div>
+
+                <p class="spec-note">Weights and KV cache are computed exactly from the model config; the activation slice is a coarse estimate that varies with framework and attention kernel. Real usage runs a little higher than the sum — leave headroom. QLoRA forces the frozen base to 4-bit regardless of the precision picker.</p>
+            </div>
+        </div>
+
+        <!-- How it works -->
+        <section id="how">
+            <div class="wrap">
+                <div class="section-head">
+                    <p class="eyebrow">The math</p>
+                    <h2>Nothing up the sleeve.</h2>
+                </div>
+                <ul class="topics">
+                    <li>
+                        <strong>Weights</strong>
+                        <span>params × bytes-per-weight. FP16 is 2 bytes, INT8/FP8 is 1, INT4/NF4 is 0.5. A 70B model at 4-bit is ~35 GB before anything else.</span>
+                    </li>
+                    <li>
+                        <strong>KV cache — the long-context killer</strong>
+                        <span>2 × layers × kv-heads × head-dim × context × batch × 2 bytes. Grows linearly with context, and at 128k it can dwarf the weights. GQA (few KV heads) is what keeps it survivable.</span>
+                    </li>
+                    <li>
+                        <strong>Optimizer state (training only)</strong>
+                        <span>Full fine-tuning with Adam needs ~16 bytes/param — weights, gradients, fp32 master copy and two Adam moments. It's why full FT wants many times the inference memory. LoRA and QLoRA only pay this on the tiny adapters.</span>
+                    </li>
+                    <li>
+                        <strong>How many GPUs</strong>
+                        <span>Total ÷ (VRAM × 0.92), rounded up. The 0.92 is because CUDA context, fragmentation and the framework never leave you the whole card.</span>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <div class="wrap">
+            <div class="contact">
+                <p class="eyebrow">Next step</p>
+                <h2>Know the size — now pick the method and the engine.</h2>
+                <p>If it fits, the other two explorers cover what to do with it: which fine-tuning method for your constraint, and which serving engine for your hardware.</p>
+                <div class="hero-links">
+                    <a class="pill" href="ft.html"><i class="fas fa-sliders" aria-hidden="true"></i> Fine-tuning explorer</a>
+                    <a class="pill" href="inference.html"><i class="fas fa-server" aria-hidden="true"></i> Inference explorer</a>
+                    <a class="pill" href="gpus.html"><i class="fas fa-microchip" aria-hidden="true"></i> GPU comparison</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="wrap">
+            <div class="foot">
+                <p>&copy; 2026 Max Zanoga · Formulas exact; model configs verify before you rely on them</p>
+                <div class="foot-links">
+                    <a href="../blog.html">Blog</a>
+                    <a href="../support.html">Support</a>
+                    <a href="https://huggingface.co/ZanMax" target="_blank" rel="noopener">Hugging Face</a>
+                    <a href="https://github.com/ZanMax" target="_blank" rel="noopener">GitHub</a>
+                    <a href="https://www.linkedin.com/in/max-zanoga/" target="_blank" rel="noopener">LinkedIn</a>
+                    <a href="https://x.com/zanoga" target="_blank" rel="noopener">X</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../assets/js/site.js?v=20260722h"></script>
+    <script src="../assets/js/vramfit.js?v=20260722h"></script>
+</body>
+</html>

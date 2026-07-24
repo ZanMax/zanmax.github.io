@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GPU comparison for LLMs — Max Zanoga</title>
+    <meta name="description" content="Compare GPUs for LLM work — NVIDIA, AMD and Intel, RTX 3090 to Blackwell and CDNA4 — VRAM, bandwidth, FP16 TFLOPS, low-precision support and power.">
+    <meta name="theme-color" content="#7CE495">
+    <link rel="icon" href="../favicon.ico">
+
+    <meta property="og:title" content="GPU comparison for LLMs — Max Zanoga">
+    <meta property="og:description" content="VRAM, bandwidth, TFLOPS and power across consumer and datacenter GPUs.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://zanmax.github.io/tools/gpus.html">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../assets/css/site.css?v=20260722h">
+    <script>try{document.documentElement.setAttribute("data-theme",localStorage.getItem("theme")||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"))}catch(e){}</script>
+</head>
+<body>
+    <a class="skip" href="#main">Skip to content</a>
+
+    <header>
+        <div class="wrap">
+            <div class="bar">
+                <a class="brand" href="../index.html"><span class="dot" aria-hidden="true"></span>Max Zanoga</a>
+                <div class="nav-actions">
+                    <nav class="primary" aria-label="Primary">
+                        <a href="../index.html#cluster">Cluster</a>
+                        <a href="../index.html#about">About</a>
+                        <a href="../index.html#projects">Projects</a>
+                    </nav>
+                    <button class="icon-btn" id="menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav">
+                        <i class="fas fa-bars" aria-hidden="true"></i>
+                    </button>
+                    <button class="icon-btn" id="theme-toggle" aria-label="Switch to dark theme">
+                        <i class="fas fa-moon" id="theme-icon" aria-hidden="true"></i>
+                    </button>
+                </div>
+            </div>
+            <nav class="mobile-nav" id="mobile-nav" aria-label="Mobile">
+                <a href="../index.html#cluster">Cluster</a>
+                <a href="../index.html#about">About</a>
+                <a href="../index.html#projects">Projects</a>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main">
+        <div class="page-head wrap">
+            <p class="eyebrow">Tool</p>
+            <h1>GPUs for <em>LLM</em> work.</h1>
+            <p class="lede">The numbers that actually decide what you can run: VRAM, memory bandwidth, low-precision support and power — NVIDIA, AMD and Intel, from the RTX 3090 up to the latest Blackwell and CDNA4 parts. Ranked by LLM performance, best on top; ★ marks the best value in each column.</p>
+        </div>
+
+        <div class="wrap">
+            <dl class="best-summary" id="best-summary"></dl>
+            <div class="filter-row" id="vendor-filter" role="group" aria-label="Filter by vendor" style="margin-bottom:1rem">
+                <span class="label">Vendor</span>
+            </div>
+            <p class="result-count" id="row-count" role="status" style="margin-bottom:.9rem"></p>
+            <div class="table-wrap">
+                <table class="spec">
+                    <thead id="thead"></thead>
+                    <tbody id="tbody"></tbody>
+                </table>
+            </div>
+            <p class="spec-note">FP16 = peak <strong>dense</strong> tensor/matrix TFLOPS (FP32 accumulate), not the 2× "sparsity" figure vendors headline. Checked against nvidia.com, amd.com and intel.com in July 2026. NVIDIA <em>and</em> AMD publish with-sparsity headlines, so the dense value is half (MI355X is 2.5 PFLOPS dense, not the 5.0 sparse figure). <strong>Intel publishes INT8 TOPS for Arc and only relative numbers for Gaudi</strong>, so those FP16 cells read "—". Confirm before budgeting.</p>
+        </div>
+
+        <!-- What matters -->
+        <section id="reading">
+            <div class="wrap">
+                <div class="section-head">
+                    <p class="eyebrow">Reading the table</p>
+                    <h2>Bandwidth decides speed, not TFLOPS.</h2>
+                </div>
+                <ul class="topics">
+                    <li>
+                        <strong>What the LLM score means</strong>
+                        <span>A transparent heuristic, not gospel: bandwidth 45%, VRAM 30%, dense compute 25%, each normalized to the fastest card here. It's weighted for serving — decode is memory-bound — so a card wins by feeding data fast and holding a lot of it. Re-sort any column to rank by that metric alone.</span>
+                    </li>
+                    <li>
+                        <strong>VRAM sets what fits</strong>
+                        <span>The first gate. A model that doesn't fit doesn't run — no amount of compute helps. This is why 24 GB consumer cards define the consumer ceiling.</span>
+                    </li>
+                    <li>
+                        <strong>Memory bandwidth sets token speed</strong>
+                        <span>LLM decode is memory-bound, not compute-bound. Tokens-per-second tracks bandwidth far more than TFLOPS — an H100 SXM's real edge over a 4090 is its ~3.3 TB/s, not its FLOPS.</span>
+                    </li>
+                    <li>
+                        <strong>Low precision is a generational divide</strong>
+                        <span>FP8 (Ada/Hopper) and FP4 (Blackwell) roughly double effective throughput for models that support them. Ampere (3090, A100) tops out at INT8 — a real reason the 4090 punches above the 3090 beyond raw specs.</span>
+                    </li>
+                    <li>
+                        <strong>Watch the power column</strong>
+                        <span>On a multi-GPU rig, TDP × card count is your PSU and cooling budget. Thirty-two 350 W cards is 11.2 kW before the rest of the machine — which is the whole reason to care where the power comes from.</span>
+                    </li>
+                    <li>
+                        <strong>Beyond NVIDIA — real, with caveats</strong>
+                        <span>vLLM officially lists AMD Instinct MI200/MI300/MI350 <em>and</em> Radeon RX 7900/9000 as ROCm targets — the MI300X (192 GB) and MI355X (288 GB) genuinely lead on memory-per-card. AMD's new 32 GB workstation cards (Radeon AI PRO R9700, PRO W7800) put serious VRAM on a desktop. Intel Arc runs through vLLM's XPU path but it's rougher — no pre-built wheels, Python 3.12 only — and Gaudi needs its own software stack. CUDA is still the smoothest road; the others cost you setup time.</span>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <div class="wrap">
+            <div class="contact">
+                <p class="eyebrow">Put it together</p>
+                <h2>Pick a card, then see what runs on it.</h2>
+                <p>The VRAM calculator turns these numbers into "how many of these do I need"; the explorers cover what to run and how to serve it.</p>
+                <div class="hero-links">
+                    <a class="pill" href="vram.html"><i class="fas fa-calculator" aria-hidden="true"></i> Will it fit?</a>
+                    <a class="pill" href="ft.html"><i class="fas fa-sliders" aria-hidden="true"></i> Fine-tuning explorer</a>
+                    <a class="pill" href="inference.html"><i class="fas fa-server" aria-hidden="true"></i> Inference explorer</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="wrap">
+            <div class="foot">
+                <p>&copy; 2026 Max Zanoga · Specs as known at build; verify datasheets before relying on them</p>
+                <div class="foot-links">
+                    <a href="../blog.html">Blog</a>
+                    <a href="../support.html">Support</a>
+                    <a href="https://huggingface.co/ZanMax" target="_blank" rel="noopener">Hugging Face</a>
+                    <a href="https://github.com/ZanMax" target="_blank" rel="noopener">GitHub</a>
+                    <a href="https://www.linkedin.com/in/max-zanoga/" target="_blank" rel="noopener">LinkedIn</a>
+                    <a href="https://x.com/zanoga" target="_blank" rel="noopener">X</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../assets/js/site.js?v=20260722h"></script>
+    <script src="../assets/js/gpus.js?v=20260722h"></script>
+</body>
+</html>

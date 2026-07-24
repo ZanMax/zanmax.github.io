@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tools — Max Zanoga</title>
+    <meta name="description" content="Interactive references for AI infrastructure work — fine-tuning methods and LLM inference engines.">
+    <meta name="theme-color" content="#7CE495">
+    <link rel="icon" href="../favicon.ico">
+
+    <meta property="og:title" content="Tools — Max Zanoga">
+    <meta property="og:description" content="Interactive references for AI infrastructure work.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://zanmax.github.io/tools/">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../assets/css/site.css?v=20260722h">
+    <script>try{document.documentElement.setAttribute("data-theme",localStorage.getItem("theme")||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"))}catch(e){}</script>
+</head>
+<body>
+    <a class="skip" href="#main">Skip to content</a>
+
+    <header>
+        <div class="wrap">
+            <div class="bar">
+                <a class="brand" href="../index.html"><span class="dot" aria-hidden="true"></span>Max Zanoga</a>
+                <div class="nav-actions">
+                    <nav class="primary" aria-label="Primary">
+                        <a href="../index.html#cluster">Cluster</a>
+                        <a href="../index.html#about">About</a>
+                        <a href="../index.html#projects">Projects</a>
+                    </nav>
+                    <button class="icon-btn" id="menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav">
+                        <i class="fas fa-bars" aria-hidden="true"></i>
+                    </button>
+                    <button class="icon-btn" id="theme-toggle" aria-label="Switch to dark theme">
+                        <i class="fas fa-moon" id="theme-icon" aria-hidden="true"></i>
+                    </button>
+                </div>
+            </div>
+            <nav class="mobile-nav" id="mobile-nav" aria-label="Mobile">
+                <a href="../index.html#cluster">Cluster</a>
+                <a href="../index.html#about">About</a>
+                <a href="../index.html#projects">Projects</a>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main">
+        <div class="page-head wrap">
+            <p class="eyebrow">Tools</p>
+            <h1>References I needed, so I <em>built</em> them.</h1>
+            <p class="lede">Interactive guides to decisions that come up constantly in AI infrastructure work. Checked against primary sources rather than assembled from blog posts.</p>
+        </div>
+
+        <div class="wrap">
+            <div class="cards">
+                <a class="card" href="ft.html">
+                    <h3>Fine-tuning method explorer</h3>
+                    <p>Twenty-nine methods — LoRA and its variants, memory tricks, alignment and multi-GPU strategies — with a wizard that narrows by hardware and constraint.</p>
+                    <div class="tags"><span>LoRA</span><span>QLoRA</span><span>GRPO</span><span>FSDP</span></div>
+                    <span class="card-cta">Open the explorer &rarr;</span>
+                </a>
+                <a class="card" href="inference.html">
+                    <h3>Inference engine explorer</h3>
+                    <p>Thirty-one serving and local engines with verified repo links, and a configurator that picks one for your model size, GPUs and use case.</p>
+                    <div class="tags"><span>vLLM</span><span>SGLang</span><span>llama.cpp</span><span>MLX</span></div>
+                    <span class="card-cta">Open the explorer &rarr;</span>
+                </a>
+                <a class="card" href="vram.html">
+                    <h3>Will it fit? — VRAM calculator</h3>
+                    <p>Model size, quantization and context to a VRAM figure — weights, KV cache and optimizer broken out — and how many 3090/4090/5090/A100/H100 GPUs that needs.</p>
+                    <div class="tags"><span>VRAM</span><span>KV cache</span><span>Multi-GPU</span></div>
+                    <span class="card-cta">Open the calculator &rarr;</span>
+                </a>
+                <a class="card" href="gpus.html">
+                    <h3>GPU comparison</h3>
+                    <p>NVIDIA, AMD and Intel — RTX 3090 up to Blackwell and CDNA4 — VRAM, bandwidth, FP16 TFLOPS, low-precision and power. Filter by vendor, sort any column.</p>
+                    <div class="tags"><span>NVIDIA</span><span>AMD</span><span>Intel</span></div>
+                    <span class="card-cta">Open the table &rarr;</span>
+                </a>
+                <a class="card" href="quant.html">
+                    <h3>Quantization format explorer</h3>
+                    <p>GGUF, AWQ, GPTQ, EXL, FP8, FP4, NF4 — size versus quality and which engines read each, so you can pick the right bits-per-weight.</p>
+                    <div class="tags"><span>GGUF</span><span>AWQ</span><span>FP8</span></div>
+                    <span class="card-cta">Open the explorer &rarr;</span>
+                </a>
+                                <a class="card" href="vc-framework.html">
+                    <h3>The VC Framework</h3>
+                    <p>A disciplined process for building software with agentic coding CLIs — Claude Code, Codex, Gemini CLI — plus what changed and what's timeless. Refreshed July 2026.</p>
+                    <div class="tags"><span>Claude Code</span><span>Codex</span><span>MCP</span></div>
+                    <span class="card-cta">Read it &rarr;</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="wrap">
+            <div class="contact">
+                <p class="eyebrow">Something missing?</p>
+                <h2>Tell me what you'd want to look up.</h2>
+                <p>These started as notes I kept re-deriving. If there's a decision you keep making from scratch, it might be worth building.</p>
+                <div class="hero-links">
+                    <a class="pill" href="mailto:zanoga.maxim@gmail.com"><i class="fas fa-envelope" aria-hidden="true"></i> Email me</a>
+                    <a class="pill" href="../index.html#cluster"><i class="fas fa-server" aria-hidden="true"></i> See the cluster</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="wrap">
+            <div class="foot">
+                <p>&copy; 2026 Max Zanoga</p>
+                <div class="foot-links">
+                    <a href="../blog.html">Blog</a>
+                    <a href="../support.html">Support</a>
+                    <a href="https://huggingface.co/ZanMax" target="_blank" rel="noopener">Hugging Face</a>
+                    <a href="https://github.com/ZanMax" target="_blank" rel="noopener">GitHub</a>
+                    <a href="https://www.linkedin.com/in/max-zanoga/" target="_blank" rel="noopener">LinkedIn</a>
+                    <a href="https://x.com/zanoga" target="_blank" rel="noopener">X</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../assets/js/site.js?v=20260722h"></script>
+</body>
+</html>
