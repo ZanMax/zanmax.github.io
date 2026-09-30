@@ -1,0 +1,77 @@
+.fc-page .page-head { padding-bottom: 2rem; }
+.fc-page .page-head h1 { max-width: 900px; }
+.fc-page .page-head .lede { max-width: 700px; }
+.fc-meta { display: flex; flex-wrap: wrap; gap: .65rem 1.4rem; margin-top: 1.3rem; color: var(--muted); font-family: var(--mono); font-size: .72rem; }
+.fc-meta span:first-child { color: var(--accent); }
+.fc-calculator { margin-bottom: 4rem; scroll-margin-top: 90px; }
+.fc-types { display: grid; grid-template-columns: repeat(5, 1fr); gap: .6rem; }
+.fc-types button { display: flex; gap: .7rem; align-items: center; justify-content: center; padding: 1.1rem .6rem; border: 1px solid var(--border); border-radius: 12px; color: var(--muted); background: var(--surface); font: 600 .9rem var(--body); cursor: pointer; }
+.fc-types button b { font: 500 1.2rem var(--mono); }
+.fc-types button:hover { border-color: var(--accent); color: var(--fg); }
+.fc-types button[aria-pressed="true"] { border-color: var(--accent); background: var(--tint); color: var(--accent); box-shadow: inset 0 -3px 0 var(--accent); }
+.fc-type-note { color: var(--muted); font-size: .9rem; padding: 1rem .2rem 1.4rem; }
+.fc-layout { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 1.4rem; align-items: start; }
+.fc-panel, .fc-result { border: 1px solid var(--border); border-radius: 18px; background: var(--surface); overflow: hidden; }
+.fc-block { padding: 1.7rem; border-bottom: 1px solid var(--border); }
+.fc-block:last-child { border-bottom: 0; }
+.fc-step { font: 500 .7rem var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.1rem; }
+.fc-field { display: flex; flex-direction: column; gap: .5rem; min-width: 0; }
+.fc-field label, .fc-key { font-size: .86rem; font-weight: 600; }
+.fc-field input, .fc-field select { width: 100%; min-width: 0; border: 1px solid var(--border); border-radius: 9px; background: var(--bg); color: var(--fg); padding: .8rem .75rem; font: .9rem var(--body); }
+.fc-field input:focus, .fc-field select:focus { border-color: var(--accent); }
+.fc-field input[aria-invalid="true"] { border-color: #d06652; }
+.fc-help { font-size: .79rem; line-height: 1.6; color: var(--muted); }
+.fc-project-fields { display: grid; gap: 1rem; }
+.fc-details { margin-top: 1.25rem; border-top: 1px solid var(--border); padding-top: 1rem; font-size: .8rem; }
+.fc-details summary { cursor: pointer; color: var(--fg); font-weight: 600; }
+.fc-details[open] summary { margin-bottom: 1rem; }
+.fc-details .fc-project-fields { margin-top: 1rem; }
+.fc-source-links { display: grid; gap: .5rem; margin-top: .75rem; }
+.fc-market-price { font: 700 1.2rem var(--display); margin: .6rem 0; }
+.fc-data-field { margin-top: 1.6rem; }
+.fc-presets { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .8rem; }
+.fc-button { display: inline-flex; align-items: center; justify-content: center; border: 1px solid var(--border); border-radius: 8px; padding: .65rem .85rem; color: var(--fg); background: var(--bg); font: 500 .8rem var(--body); cursor: pointer; text-decoration: none; }
+.fc-button:hover { border-color: var(--accent); color: var(--accent); }
+.fc-button[aria-pressed="true"] { color: var(--accent); border-color: var(--accent); background: var(--tint); }
+.fc-button.primary { border-color: var(--accent); background: var(--accent); color: var(--bg); }
+.fc-scopes { display: grid; gap: .65rem; }
+.fc-scope { display: flex; flex-direction: column; gap: .35rem; width: 100%; position: relative; padding: 1rem 2.8rem 1rem 1rem; text-align: left; border: 1px solid var(--border); border-radius: 10px; color: var(--fg); background: var(--bg); font: .86rem var(--body); cursor: pointer; }
+.fc-scope span { color: var(--muted); font-size: .8rem; }
+.fc-scope::after { content: ''; position: absolute; top: 1.1rem; right: 1rem; width: 16px; height: 16px; border-radius: 50%; border: 1px solid var(--border); }
+.fc-scope:hover { border-color: var(--accent); }
+.fc-scope[aria-pressed="true"] { border-color: var(--accent); background: var(--tint); }
+.fc-scope[aria-pressed="true"]::after { border: 5px solid var(--accent); }
+.fc-result { position: sticky; top: 90px; padding: 1.7rem; }
+.fc-result h2 { font: 500 .7rem var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--accent); }
+.fc-total { font: 800 clamp(2rem, 3.2vw, 3.3rem) var(--display); letter-spacing: -.045em; line-height: 1.2; margin: 1rem 0 .6rem; overflow-wrap: anywhere; }
+.fc-total.fc-custom { font-size: clamp(2rem, 3vw, 2.8rem); }
+.fc-summary { font-size: .8rem; color: var(--muted); line-height: 1.6; }
+.fc-lines { margin: 1.5rem 0; padding: 1rem 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+.fc-lines div { display: flex; justify-content: space-between; gap: 1rem; padding: .45rem 0; font-size: .8rem; }
+.fc-lines dt { color: var(--muted); }
+.fc-lines dd { text-align: right; margin: 0; }
+.fc-included { list-style: none; padding: 0; margin: .8rem 0 1.5rem; }
+.fc-included li { position: relative; padding-left: 1.35rem; font-size: .83rem; margin: .65rem 0; color: var(--muted); line-height: 1.6; }
+.fc-included li::before { content: '✓'; position: absolute; left: 0; color: var(--accent); }
+.fc-result-note { background: var(--tint); border-radius: 10px; padding: .9rem; font-size: .79rem; line-height: 1.7; color: var(--muted); }
+.fc-actions { display: flex; flex-wrap: wrap; gap: .5rem; margin: 1.2rem 0 .8rem; }
+.fc-error { color: #ce6551; font-size: .86rem; margin-top: .8rem; }
+.fc-hint { padding: 1rem; color: var(--muted); }
+.fc-page [hidden] { display: none !important; }
+.fc-page button:focus-visible, .fc-page input:focus-visible, .fc-page select:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+@media (max-width: 850px) {
+    .fc-layout { grid-template-columns: 1fr; }
+    .fc-result { position: static; }
+    .fc-types button { flex-direction: column; gap: .2rem; font-size: .76rem; padding: .8rem .3rem; }
+}
+@media (max-width: 480px) {
+    .fc-block, .fc-result { padding: 1.2rem; }
+    .fc-types { gap: .3rem; }
+    .fc-types button { font-size: .67rem; }
+    .fc-lines div { flex-wrap: wrap; gap: .4rem; }
+}
+@media print {
+    header, footer, .fc-types, .fc-actions, #fc-form { display: none !important; }
+    .fc-layout { display: block; }
+    .fc-result { position: static; break-inside: avoid; }
+}

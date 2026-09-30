@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fine-tuning cost calculator — Max Zanoga</title>
+    <meta name="description" content="Estimate fine-tuning services for text, images, videos, audio and classifiers.">
+    <meta name="theme-color" content="#7CE495">
+    <link rel="icon" href="../favicon.ico">
+
+    <meta property="og:title" content="Fine-tuning cost calculator — Max Zanoga">
+    <meta property="og:description" content="A simple fine-tuning service price calculator for your business.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://zanmax.github.io/tools/finetuning-cost.html">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../assets/css/site.css?v=20260722h">
+    <link rel="canonical" href="https://zanmax.github.io/tools/finetuning-cost.html">
+    <link rel="stylesheet" href="../assets/css/finetuning-cost.css?v=20260930i">
+    <script>try{document.documentElement.setAttribute("data-theme",localStorage.getItem("theme")||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"))}catch(e){}</script>
+</head>
+<body class="fc-page">
+    <a class="skip" href="#main">Skip to content</a>
+
+    <header>
+        <div class="wrap">
+            <div class="bar">
+                <a class="brand" href="../index.html"><span class="dot" aria-hidden="true"></span>Max Zanoga</a>
+                <div class="nav-actions">
+                    <nav class="primary" aria-label="Primary">
+                        <a href="../index.html#cluster">Cluster</a>
+                        <a href="../index.html#about">About</a>
+                        <a href="../index.html#projects">Projects</a>
+                    </nav>
+                    <button class="icon-btn" id="menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav">
+                        <i class="fas fa-bars" aria-hidden="true"></i>
+                    </button>
+                    <button class="icon-btn" id="theme-toggle" aria-label="Switch to dark theme">
+                        <i class="fas fa-moon" id="theme-icon" aria-hidden="true"></i>
+                    </button>
+                </div>
+            </div>
+            <nav class="mobile-nav" id="mobile-nav" aria-label="Mobile">
+                <a href="../index.html#cluster">Cluster</a>
+                <a href="../index.html#about">About</a>
+                <a href="../index.html#projects">Projects</a>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main">
+        <div class="page-head wrap">
+            <p class="eyebrow"><a href="./">Tools</a> / Fine-tuning cost</p>
+            <h1>A fine-tune costs</h1>
+        </div>
+        <div class="wrap">
+            <section id="calculator" class="fc-calculator" aria-label="Fine-tuning service calculator">
+                <div class="fc-types" id="fc-types" role="group" aria-label="What would you like to fine-tune?">
+                    <button type="button" data-type="text" aria-pressed="true"><b aria-hidden="true">Aa</b> Text</button>
+                    <button type="button" data-type="image" aria-pressed="false"><b aria-hidden="true">◈</b> Image</button>
+                    <button type="button" data-type="video" aria-pressed="false"><b aria-hidden="true">▷</b> Videos</button>
+                    <button type="button" data-type="audio" aria-pressed="false"><b aria-hidden="true">≋</b> Audio</button>
+                    <button type="button" data-type="classifier" aria-pressed="false"><b aria-hidden="true">⌘</b> Classifier</button>
+                </div>
+                <p id="fc-type-note" class="fc-type-note">Teach AI to write, answer questions or extract information in the way your business needs.</p>
+                <noscript><p class="fc-hint">Please enable JavaScript to use the calculator, or <a href="mailto:zanoga.maxim@gmail.com">email me for an estimate</a>.</p></noscript>
+                <div class="fc-layout">
+                    <form id="fc-form" class="fc-panel" novalidate>
+                        <div class="fc-block">
+                            <p class="fc-step">01 / Project details</p>
+                            <div class="fc-project-fields">
+                                <div class="fc-field" id="fc-audio-field" hidden>
+                                    <label for="fc-audio-task">What should the audio model do?</label>
+                                    <select id="fc-audio-task"></select>
+                                </div>
+                                <div class="fc-field" id="fc-size-field">
+                                    <label for="fc-size" id="fc-size-label">How large is the text model?</label>
+                                    <select id="fc-size"></select>
+                                </div>
+                                <div class="fc-project-fields" id="fc-project-fields"></div>
+                            </div>
+                        </div>
+                        <div class="fc-block">
+                            <p class="fc-step">02 / Your examples</p>
+                            <div class="fc-field">
+                                <label for="fc-quantity" id="fc-quantity-label">How many text examples do you have?</label>
+                                <input id="fc-quantity" type="number" min="1" step="1" value="2000" required aria-describedby="fc-quantity-note">
+                                <p class="fc-help" id="fc-quantity-note">An example can be a question and answer, a piece of writing, or a completed task.</p>
+                            </div>
+                            <div id="fc-presets" class="fc-presets" role="group" aria-label="Example amounts"></div>
+                            <div class="fc-field fc-data-field">
+                                <label for="fc-data">Are your examples ready?</label>
+                                <select id="fc-data" aria-describedby="fc-data-note">
+                                    <option value="ready">Yes, ready to use</option>
+                                    <option value="organize">They need cleaning and organizing</option>
+                                    <option value="prepare">I have material, but need help preparing examples</option>
+                                </select>
+                                <p class="fc-help" id="fc-data-note"></p>
+                            </div>
+                        </div>
+                        <div class="fc-block">
+                            <p class="fc-step">03 / What you need delivered</p>
+                            <div id="fc-scope" class="fc-scopes" role="group" aria-label="Project package">
+                                <button class="fc-scope" type="button" data-scope="basic" aria-pressed="false"><strong>Fine-tune</strong><span>A custom AI with example results.</span></button>
+                                <button class="fc-scope" type="button" data-scope="tested" aria-pressed="true"><strong>Fine-tune + test</strong><span>See how well it works on new examples.</span></button>
+                                <button class="fc-scope" type="button" data-scope="handover" aria-pressed="false"><strong>Ready for your team</strong><span>Testing, setup help and a guided handover.</span></button>
+                            </div>
+                        </div>
+                    </form>
+                    <aside class="fc-result" aria-label="Your estimated project price">
+                        <h2>Estimated project price</h2>
+                        <div aria-live="polite" aria-atomic="true"><p id="fc-total" class="fc-total">—</p><p id="fc-summary" class="fc-summary">Choose your project</p></div>
+                        <div id="fc-error" class="fc-error" role="alert" hidden></div>
+                        <dl class="fc-lines" id="fc-lines"></dl>
+                        <p class="fc-key">Included in your project</p>
+                        <ul class="fc-included" id="fc-included"></ul>
+                        <p class="fc-result-note" id="fc-estimate-note" hidden></p>
+                    </aside>
+                </div>
+            </section>
+        </div>
+    </main>
+    <footer>
+        <div class="wrap">
+            <div class="foot">
+                <p>&copy; 2026 Max Zanoga · Fine-tuning services</p>
+                <div class="foot-links">
+                    <a href="../blog.html">Blog</a>
+                    <a href="../support.html">Support</a>
+                    <a href="https://huggingface.co/ZanMax" target="_blank" rel="noopener">Hugging Face</a>
+                    <a href="https://github.com/ZanMax" target="_blank" rel="noopener">GitHub</a>
+                    <a href="https://www.linkedin.com/in/max-zanoga/" target="_blank" rel="noopener">LinkedIn</a>
+                    <a href="https://x.com/zanoga" target="_blank" rel="noopener">X</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../assets/js/site.js?v=20260722h"></script>
+    <script src="../assets/js/finetuning-prices.js?v=20260930standard"></script>
+    <script src="../assets/js/finetuning-math.js?v=20260930standard"></script>
+    <script src="../assets/js/finetuning-cost.js?v=20260930whole"></script>
+</body>
+</html>
